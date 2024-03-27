@@ -11,15 +11,23 @@ class SøgEfterID(Søgestrategi):
         return result
 
 class SøgEfterKategori(Søgestrategi):
-    def søg(self, kategori, cursor):
-        cursor.callproc('SøgEfterKategori', (kategori,))
+    def søg(self, kategori_ID, cursor):
+        cursor.callproc('SøgEfterKategori', (kategori_ID,))
         result = cursor.fetchall()
         return result
 
-# Kontekstklassen, der anvender søgestrategien
-class Søgning:
-    def __init__(self, strategi):
-        self.strategi = strategi
+class SøgEfterTransaktion(Søgestrategi):
+    def søg(self, transaktion_id, cursor):
+        cursor.callproc('SøgEfterTransaktion', (transaktion_id,))
+        result = cursor.fetchone()
+        return result
 
-    def udfør_søgning(self, parameter, cursor):
-        return self.strategi.søg(parameter, cursor)
+class SøgEfterVare(Søgestrategi):
+    def søg(self, vare_id, cursor):
+        cursor.callproc('SøfEfterVare', (vare_id,))
+        result = cursor.fetchone()
+        return result
+
+
+    
+

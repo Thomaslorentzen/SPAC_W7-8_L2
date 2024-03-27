@@ -201,8 +201,8 @@ class KategoriHandler:
     def søg_efter_kategori(self, cursor):
         parameter = input("Indtast søgeparameter for kategori: ")
         søgning = SøgEfterKategori()
-        result = søgning.søg(parameter, cursor)  # Pass the cursor here
-        print(result)  # Display search results
+        result = søgning.søg(parameter, cursor)  
+        print(result)  
 
     def slet_kategori(self):
         kategori_ID = int(input("Indtast ID på kategorien, som skal slettes: "))

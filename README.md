@@ -13,3 +13,7 @@ I denne opgave er der i høj grad blevet lagt vægt fra min side på at kunne f�
 Disse procedures kaldes alle igennem koden i klasserne for de forskellige tables. Dette er et design mæssigt valg for at opsplitte funktionaliteten yderligere.
 
 med i dette github projekt ligger også en tilhørende SQL fil, som bør køres i sin lokale MYSQL workbench. Denne opretter både tables og stored procedures. 
+
+Med andre ord, efter CRUD princippet var det operationerne i R som mangler at virke rigtigt,selvom forsøgt implementation er bevaret i denne besvarelse. 
+
+Fremtidig lsning ville være at inkludere triggers til at håndtere rapport generering f.eks.
