@@ -102,7 +102,8 @@ class Menu:
         print("1. Opret transaktion")
         print("2. Registrer transaktion")
         print("3. Søg efter vare")
-        print("4. Tilbage til hovedmenu")
+        print("4. Generer transaktionsrapport")  # Ny mulighed
+        print("5. Tilbage til hovedmenu")
 
     def kør_transaktions_menu(self):
         while True:
@@ -115,12 +116,34 @@ class Menu:
                 self.transaktions_handler.registrer_transaktion()
             elif valg == "3":
                 self.transaktions_handler.søg_efter_transaktion(self.cursor)  
-            elif valg == "4":
+            elif valg == "4":  # Ny case for at generere rapport
+                self.generer_transaktionsrapport()
+            elif valg == "5":
                 print("Tilbage til hovedmenu...")
                 break
             else:
-                print("Ugyldigt valg. Prøv igen.")
-
+                print("Ugyldigt valg. Prøv igen.")  
+    
+    def generer_transaktionsrapport(self):
+        while True:
+            try:
+                vare_ID = int(input("Indtast ID på varen, du vil generere en rapport for: "))
+                transaktioner = Transaktion.hent_transaktioner_for_vare(vare_ID, self.session)
+                if transaktioner:
+                    print("\nTransaktionsrapport for vare med ID {}:\n".format(vare_ID))
+                    print("{:<15} {:<25} {:<20} {:<10}".format("Transaktion ID", "Dato og tid", "Transaktionstype", "Antal"))
+                    print("-" * 70)
+                    for transaktion in transaktioner:
+                        transaktion_ID, dato_og_tid, _, _, antal, transaktionstype = transaktion
+                        print("{:<15} {:<25} {:<20} {:<10}".format(transaktion_ID, dato_og_tid, transaktionstype, antal))
+                    print("\n")
+                    break  # Stop loopet hvis alt er i orden
+                else:
+                    print("Ingen transaktioner fundet for denne vare.")
+                    return  # Gå tilbage til transaktionsmenuen
+            except ValueError:
+                print("Ugyldigt vare-ID. Prøv igen.")
+                return  # Gå tilbage til transaktionsmenuen
             
 
 class VareHandler:

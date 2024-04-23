@@ -139,6 +139,17 @@ class Transaktion(Base):
             print("Transaktionen er oprettet.")
         except Exception as ex:
             print(f"Fejl ved oprettelse af transaktion: {ex}")
+    
+    
+
+    @staticmethod
+    def hent_transaktioner_for_vare(vare_ID, session):
+        statement = text("SELECT * FROM transaktioner WHERE vare_id = :vare_ID")
+        result = session.execute(statement, {"vare_ID": vare_ID})
+        return result.fetchall()
+
+    # tidligere kode her...
+
 
 class Søgestrategi:
     def søg(self, parameter, cursor):
